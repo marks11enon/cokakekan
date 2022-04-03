@@ -5,8 +5,8 @@
       <div>
         <%= form_with model: @month, url: months_path, local: true do |f| %>
           <div>
-            <%= f.label :date, "家計簿", class: "control-label" %>
-            <%= f.date_field :date, class: "form-control" %>
+            <%= f.label :month, "家計簿", class: "control-label" %>
+            <%= f.date_field :month, class: "form-control" %>
           </div>
           <div>
             <%= f.label :balance, "口座残高", class: "control-label" %><br>

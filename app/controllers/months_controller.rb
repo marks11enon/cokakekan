@@ -5,18 +5,20 @@ class MonthsController < ApplicationController
   end
 
   def create
+    @month.user_id = current_user.id
     @month = Month.new(month_params)
     @data = Month.find_by(user_id: current_user.id, month: @month.month)
     @month.balance_last = @month.balance
+    binding.pry
     if !@data.present?
       @month.user_id = current_user.id
       if @month.save
-        redirect_back_or_to months_path, success: '家計簿を追加しました'
+        redirect_to months_path
       else
-        redirect_back_or_to months_path, danger: '追加できませんでした'
+        render :new, danger
       end
     else
-      redirect_back_or_to months_path, danger: '同じ月は追加できません'
+      redirect_to months_path
     end
   end
 
@@ -37,8 +39,8 @@ class MonthsController < ApplicationController
   def destroy
   end
 
-  # private
-  # def month_params
-  #  params.require(:month).permit(:user_id, :month)
-  # end
+  private
+  def month_params
+    params.require(:month).permit(:user_id, :month, :balance)
+  end
 end

@@ -1,2 +1,32 @@
-<h1>Months#index</h1>
-<p>Find me in app/views/months/index.html.erb</p>
+<div class="container">
+  <div class="row">
+
+    <!-- ここにグラフを挿入  -->
+
+    <div>
+    <h3>家計簿一覧</h3><br>
+      <div>
+        <table class="table">
+          <% @months.each do |month| %>
+            <thead>
+              <tr>
+                <th><%= month.month %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>月末残高</td>
+                <td><%= month.balance_last %></td>
+                <td><%= link_to "編集", edit_month_path(month.id), class: "btn btn-primary" %></td>
+                <td><%= link_to "削除", month_path(month.id), method: :delete, class: "btn btn-danger" %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div>
+    <%= link_to "新規作成", new_month_path, class: "btn btn-primary" %>
+  </div>
+</div>

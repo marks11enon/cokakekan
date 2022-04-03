@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  month_id: 1
+  category_id: 1
+  income: 1
+  spending: 1
+  note: MyText
+  player: 1
+  status: false
+  date: 2022-04-03
+
+two:
+  user_id: 1
+  month_id: 1
+  category_id: 1
+  income: 1
+  spending: 1
+  note: MyText
+  player: 1
+  status: false
+  date: 2022-04-03

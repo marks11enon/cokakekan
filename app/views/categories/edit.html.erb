@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div>
+    <h3>カテゴリ編集</h3><br>
+      <div>
+        <%= form_with model: @category, url: category_path, method: :patch, local: true do |f| %>
+          <div>
+            <%= f.label :image, "カテゴリアイコン" %>
+            <%= f.file_field :image, accept: "image/*", class: "category_image" %>
+          </div>
+          <div>
+            <%= f.label :name, "カテゴリ編集" %>
+            <%= f.text_field :name, class:"category_name" %>
+            <%= f.submit '変更を保存', class:"btn btn-primary" %>
+            <%= link_to "キャンセル", categories_path, class: "btn btn-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

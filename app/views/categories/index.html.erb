@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div>
+    <h3>カテゴリ追加・一覧</h3><br>
+      <div>
+        <%= form_with model: @category, url: categories_path, local: true do |f| %>
+          <div>
+            <%= f.label :image, "カテゴリアイコン" %>
+            <%= f.file_field :image, accept: "image/*", class: "category_image" %>
+          </div>
+          <div>
+            <%= f.label :name, "カテゴリの追加" %>
+            <%= f.text_field :name, class:"category_name" %>
+            <%= f.submit '登録', class:"btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>カテゴリ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr>
+              <td>
+                <%= attachment_image_tag category, :image, size: "30x30", format: 'jpeg', fallback: "no_image.jpeg" %>
+                <%= category.name %>
+              </td>
+              <td><%= link_to "編集", edit_category_path(category.id), class: "btn btn-primary" %></td>
+              <td><%= link_to "削除", category_path(category.id), method: :delete, class: "btn btn-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

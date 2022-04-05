@@ -1,2 +1,46 @@
-<h1>Details#new</h1>
-<p>Find me in app/views/details/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div>
+    <h3>明細入力</h3><br>
+      <div>
+        <%= form_with model: @detail, url: details_path, local: true do |f| %>
+          <!--  支出 or 収入 選択  -->
+          <div>
+            <%= f.label :spending, "支出", class: "control-label" %>
+            <%= f.text_field :spending, class: "form-control" %>円
+          </div>
+          <div>
+            <%= f.label :income, "収入", class: "control-label" %>
+            <%= f.text_field :income, class: "form-control" %>円
+          </div>
+          <!-- カテゴリ  -->
+          <div>
+            <%= f.label :category, "カテゴリ", class: "control-label" %>
+            <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: " --選択してください-- " %>
+          </div>
+          <!-- 日付 -->
+          <div>
+            <%= f.label :date, "日付", class: "control-label" %><br>
+            <%= f.date_field :date, class:"form-control" %>
+          </div>
+          <!-- メモ -->
+          <div>
+            <%= f.label :note, "詳細", class: "control-label" %>
+            <%= f.text_field :note, placeholder: "詳細メモ", class: "form-control" %>
+          </div>
+          <!-- 支払元 -->
+          <div>
+            <%= f.label :player, "支払元", class: "control-label" %>
+            <%= f.select :player, [["彼氏さんの口座", "彼氏"], ["彼女さんの口座", "彼氏"]], {include_blank: "どの口座から支払った？"}, class: "form-control" %>
+          </div>
+          <div>
+            <%= f.submit '保存', class:"btn btn-primary" %>
+          </div>
+          <div>
+            <%= link_to "キャンセル", details_path, class: "btn btn-secondary btn-sm" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

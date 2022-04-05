@@ -5,11 +5,16 @@ class MonthsController < ApplicationController
   end
 
   def create
-    @month.user_id = current_user.id
     @month = Month.new(month_params)
+    @month.user_id = current_user.id
+
+
+    # 以下、要確認
+
     @data = Month.find_by(user_id: current_user.id, month: @month.month)
-    @month.balance_last = @month.balance
     binding.pry
+    @month.balance_last = @month.balance
+
     if !@data.present?
       @month.user_id = current_user.id
       if @month.save
@@ -20,6 +25,8 @@ class MonthsController < ApplicationController
     else
       redirect_to months_path
     end
+
+    #ここまで
   end
 
   def index
@@ -34,9 +41,20 @@ class MonthsController < ApplicationController
   end
 
   def edit
+    @month = Month.find(params[:id])
+  end
+
+  def update
+    month = Month.find(params[:id])
+    month.update(month_params)
+    redirect_to months_path
   end
 
   def destroy
+    @month = Month.find(params[:id])
+    @month.destroy
+    flash[:alert] = "#{@month.month.strftime("%Y年 %m月")}の家計簿は削除しました。"
+    redirect_to months_path
   end
 
   private

@@ -10,7 +10,9 @@
           <% @months.each do |month| %>
             <thead>
               <tr>
-                <th><%= month.month %></th>
+                <th>
+                  <%= link_to "#{month.month.strftime("%Y年 %m月")}", month_path(month.id), style:"color: black;" %>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -26,6 +28,8 @@
       </div>
     </div>
   </div>
+
+  <!-- ボタンを作成  -->
   <div>
     <%= link_to "新規作成", new_month_path, class: "btn btn-primary" %>
   </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_03_082029) do
+ActiveRecord::Schema.define(version: 2022_04_06_150102) do
 
   create_table "budgets", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2022_04_03_082029) do
     t.integer "spending"
     t.text "note"
     t.integer "player"
-    t.boolean "status"
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status", default: true
   end
 
   create_table "months", force: :cascade do |t|

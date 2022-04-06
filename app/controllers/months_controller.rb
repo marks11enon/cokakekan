@@ -12,7 +12,6 @@ class MonthsController < ApplicationController
     # 以下、要確認
 
     @data = Month.find_by(user_id: current_user.id, month: @month.month)
-    binding.pry
     @month.balance_last = @month.balance
 
     if !@data.present?

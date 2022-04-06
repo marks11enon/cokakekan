@@ -1,2 +1,27 @@
-<h1>Details#index</h1>
-<p>Find me in app/views/details/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div>
+    <h3>入出金明細</h3><br>
+    <!-- 検索機能実装  -->
+      <div>
+        <table class="table">
+          <%= @details.each do |detail| %>
+            <thead>
+              <tr>
+                <!-- 日付  -->
+                <th>
+                  <%= detail.date.strftime("%Y年 %m月 %d日") %>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th></th>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

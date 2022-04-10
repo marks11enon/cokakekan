@@ -17,8 +17,11 @@
                   <%= attachment_image_tag detail.category, :image, size: "30x30", format: 'jpeg', fallback: "no_image.jpeg" %>
                 </td>
                 <td><%= detail.category.name %></td>
-                <td><%= detail.income %></td>
-                <td><%= detail.spending %></td>
+                <% if detail.income.present? %>_
+                  <td>+<%= detail.income.floor.to_s(:delimited, delimiter: ',') %>円</td>
+                <% else %>
+                  <td>-<%= detail.spending.floor.to_s(:delimited, delimiter: ',') %>円</td>
+                <% end %>
                 <td><%= detail.player_i18n %></td>
               </tr>
             </tbody>

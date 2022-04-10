@@ -4,19 +4,22 @@
     <h3>入出金明細</h3><br>
     <!-- 検索機能実装  -->
       <div>
+        <%= link_to "新規登録", new_month_detail_path, class: "btn btn-primary btn-sm" %>
+        <%= link_to "一覧に戻る", months_path, class: "btn btn-secondary btn-sm" %>
+      </div><br>
+      <div>
         <table class="table">
-          <%= @details.each do |detail| %>
-            <thead>
-              <tr>
-                <!-- 日付  -->
-                <th>
-                  <%= detail.date.strftime("%Y年 %m月 %d日") %>
-                </th>
-              </tr>
-            </thead>
+          <% @details.each do |detail| %>
             <tbody>
               <tr>
-                <th></th>
+                <td><%= detail.date.strftime("%d日") %></td>
+                <td>
+                  <%= attachment_image_tag detail.category, :image, size: "30x30", format: 'jpeg', fallback: "no_image.jpeg" %>
+                </td>
+                <td><%= detail.category.name %></td>
+                <td><%= detail.income %></td>
+                <td><%= detail.spending %></td>
+                <td><%= detail.player_i18n %></td>
               </tr>
             </tbody>
           <% end %>

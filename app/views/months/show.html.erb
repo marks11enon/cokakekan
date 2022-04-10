@@ -1,2 +1,22 @@
-<h1>Months#show</h1>
-<p>Find me in app/views/months/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div>
+    <h3><%= @month.month.strftime("%Y年 %m月") %></h3><br>
+    <!-- 検索機能実装  -->
+      <div>
+        <%= link_to "入出金登録", new_month_detail_path(@month), class: "btn btn-secondary btn-sm" %>
+
+      </div>
+
+
+
+
+
+    <div>
+      <%= link_to "一覧に戻る", months_path, class: "btn btn-secondary btn-sm" %>
+    </div>
+
+
+    </div>
+  </div>
+</div>

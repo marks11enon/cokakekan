@@ -37,6 +37,7 @@ class MonthsController < ApplicationController
 
   def show
     @month = Month.find(params[:id])
+    @detail = Detail.new
   end
 
   def edit

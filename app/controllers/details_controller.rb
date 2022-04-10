@@ -1,14 +1,15 @@
 class DetailsController < ApplicationController
+
   def new
     @detail = Detail.new
   end
 
   def create
-    @detail = Detail.new(detail_params)
-    @detail.user_id = current_user.id
-    binding.pry
-    @detail.save
-    redirect_to details_path
+    detail = Detail.new(detail_params)
+    detail.user_id = current_user.id
+    detail.month_id = params[:month_id]
+    detail.save
+    redirect_to month_details_path
   end
 
   def index

@@ -3,15 +3,15 @@
     <div>
     <h3>明細入力</h3><br>
       <div>
-        <%= form_with model: @detail, url: details_path, local: true do |f| %>
+        <%= form_with model: @detail, url: month_details_path, local: true do |f| %>
           <!--  支出 or 収入 選択  -->
           <div>
             <%= f.label :spending, "支出", class: "control-label" %>
-            <%= f.text_field :spending, class: "form-control" %>円
+            <%= f.text_field :spending, class: "form-control", placeholder: "0円" %>
           </div>
           <div>
             <%= f.label :income, "収入", class: "control-label" %>
-            <%= f.text_field :income, class: "form-control" %>円
+            <%= f.text_field :income, class: "form-control", placeholder: "0円" %>
           </div>
           <!-- カテゴリ  -->
           <div>
@@ -21,7 +21,7 @@
           <!-- 日付 -->
           <div>
             <%= f.label :date, "日付", class: "control-label" %><br>
-            <%= f.date_field :date, class:"form-control" %>
+            <%= f.date_field :date, class:"form-control", value: Date.today %>
           </div>
           <!-- メモ -->
           <div>
@@ -31,13 +31,13 @@
           <!-- 支払元 -->
           <div>
             <%= f.label :player, "支払元", class: "control-label" %>
-            <%= f.select :player, [["彼氏さんの口座", "彼氏"], ["彼女さんの口座", "彼氏"]], {include_blank: "どの口座から支払った？"}, class: "form-control" %>
+            <%= f.select :player, Detail.players.keys.map{|k| [I18n.t("enums.detail.player.#{k}"), k]}, class: "form-control" %>
           </div>
           <div>
             <%= f.submit '保存', class:"btn btn-primary" %>
           </div>
           <div>
-            <%= link_to "キャンセル", details_path, class: "btn btn-secondary btn-sm" %>
+            <%= link_to "キャンセル", months_path, class: "btn btn-secondary btn-sm" %>
           </div>
         <% end %>
       </div>

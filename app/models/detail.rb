@@ -12,5 +12,6 @@ class Detail < ApplicationRecord
   validates :note, length: { maximum: 50 }
 
   # enum 設定
+  enum player: { by_him: 0, by_her: 1 }
 
 end

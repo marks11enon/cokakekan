@@ -4,25 +4,31 @@
     <h3>入出金明細</h3><br>
     <!-- 検索機能実装  -->
       <div>
-        <%= link_to "新規登録", new_month_detail_path, class: "btn btn-primary btn-sm" %>
-        <%= link_to "一覧に戻る", months_path, class: "btn btn-secondary btn-sm" %>
+        <%= link_to "明細を追加", new_month_detail_path, class: "btn btn-primary btn-sm" %>
+        <%= link_to "家計簿一覧に戻る", months_path, class: "btn btn-secondary btn-sm" %>
       </div><br>
       <div>
         <table class="table">
           <% @details.each do |detail| %>
             <tbody>
               <tr>
-                <td><%= detail.date.strftime("%d日") %></td>
+                <td><%= detail.date.strftime("%-d日") %></td>
                 <td>
                   <%= attachment_image_tag detail.category, :image, size: "30x30", format: 'jpeg', fallback: "no_image.jpeg" %>
                 </td>
-                <td><%= detail.category.name %></td>
-                <% if detail.income.present? %>_
-                  <td>+<%= detail.income.floor.to_s(:delimited, delimiter: ',') %>円</td>
-                <% else %>
-                  <td>-<%= detail.spending.floor.to_s(:delimited, delimiter: ',') %>円</td>
-                <% end %>
+                <td>
+                  <%= detail.category.name %>
+                </td>
+                </td>
+                  <% if detail.income.present? %>
+                    <td>+<%= detail.income.floor.to_s(:delimited, delimiter: ',') %>円</td>
+                  <% else %>
+                    <td>-<%= detail.spending.floor.to_s(:delimited, delimiter: ',') %>円</td>
+                  <% end %>
                 <td><%= detail.player_i18n %></td>
+                <td>
+                  <%= link_to "編集する", edit_month_detail_path(month.detail.id), class: "btn btn-secondary btn-sm" %>
+                </td>
               </tr>
             </tbody>
           <% end %>

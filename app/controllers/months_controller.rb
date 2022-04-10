@@ -29,15 +29,10 @@ class MonthsController < ApplicationController
   end
 
   def index
-    @months = Month.where(user_id: current_user.id).includes(:user).order(month: :desc)
+    @months = Month.all.order(month: :desc)
     @month = Month.new
     # @column_chart = Month.where(user_id: current_user.id).includes(:user).order(month: :asc).last(12).pluck(:month, :balance_last)
     # @colum_chart_max =Month.where(user_id: current_user.id).includes(:user).order(month: :asc).last(12).pluck(:balance_last).max
-  end
-
-  def show
-    @month = Month.find(params[:id])
-    @detail = Detail.new
   end
 
   def edit

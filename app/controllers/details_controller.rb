@@ -16,11 +16,17 @@ class DetailsController < ApplicationController
     @details = Detail.where(user_id: current_user.id, month_id: params[:month_id]).includes(:month).order(date: :asc, id: :asc)
   end
 
-  def show
+  def edit
+    detail.month_id = params[:month_id]
+    @detail = detail.find(params[:id])
   end
 
   private
   def detail_params
-    params.require(:detail).permit(:category_id, :income, :spending, :note, :player, :date)
+    params.require(:detail).permit(:income, :spending, :note, :player, :date, :category_id)
+  end
+
+  def detail_params_edit
+    params.require(:detail).permit(:income, :spending, :note, :player, :date, :category_id)
   end
 end

@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :create, :edit, :destroy, :update]
   resources :budgets
   resources :months, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-    resources :details
+    resources :details, only: [:new, :create, :index, :edit, :update, :destroy]
   end
-  get '/homes/about' => "homes#about", as: "about"
+  get '/details/:id/edit' => "details#edit"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

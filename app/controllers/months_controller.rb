@@ -41,7 +41,7 @@ class MonthsController < ApplicationController
 
   def update
     month = Month.find(params[:id])
-    month.update(month_params)
+    month.update
     redirect_to months_path
   end
 

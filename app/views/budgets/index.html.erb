@@ -1,2 +1,31 @@
-<h1>Budgets#index</h1>
-<p>Find me in app/views/budgets/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div>
+    <h3>予算一覧</h3><br>
+      <div>
+        <table class="table">
+          <% @budgets.each do |budget| %>
+            <thead>
+              <tr>
+                <th>
+                  <%= budget.month.month.strftime("%Y年 %m月") %>の予算
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= budget.amount %></td>
+                <td><%= link_to "削除", budget_path(budget.id), method: :delete, class: "btn btn-danger" %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ボタンを作成  -->
+  <div>
+    <%= link_to "新規作成", new_budget_path, class: "btn btn-primary" %>
+  </div>
+</div>

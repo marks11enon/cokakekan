@@ -5,13 +5,16 @@
       <div>
         <%= form_with model: @budget, url: budgets_path, local: true do |f| %>
           <div>
-            <%= f.label :month, "家計簿", class: "control-label" %>
-            <%= f.date_field :month, class: "form-control" %>
+            <%= f.label :month_id, "何月の予算ですか？", class: "control-label" %><br>
+            <!-- 余力があれば修正  -->
+            <%= f.collection_select :month_id, Month.all, :id, :month, include_blank: " --選択してください-- " %>
           </div>
           <div>
-            <%= f.label :balance, "口座残高", class: "control-label" %><br>
-            <%= f.text_field :balance, class:"form-control" %>
-            <%= f.submit '登録', class:"btn btn-primary" %>
+            <%= f.label :amount, "予算", class: "control-label" %>
+            <%= f.text_field :amount, placeholder: "金額を入力", class: "form-control" %>
+          </div>
+          <div>
+            <%= f.submit '登録', class:"btn btn-primary btn-sm" %>
           </div>
           <div>
             <%= link_to "キャンセル", months_path, class: "btn btn-secondary btn-sm" %>

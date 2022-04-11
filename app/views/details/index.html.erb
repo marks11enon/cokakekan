@@ -26,9 +26,8 @@
                     <td>-<%= detail.spending.floor.to_s(:delimited, delimiter: ',') %>円</td>
                   <% end %>
                 <td><%= detail.player_i18n %></td>
-                <td>
-                  <%= link_to "編集する", edit_month_detail_path(month.detail.id), class: "btn btn-secondary btn-sm" %>
-                </td>
+                <td><%= link_to "編集", edit_detail_path(detail.id), class: "btn btn-secondary btn-sm" %></td>
+                <td><%= link_to "削除", detail_path(detail.id), method: :delete, class: "btn btn-danger btn-sm" %></td>
               </tr>
             </tbody>
           <% end %>

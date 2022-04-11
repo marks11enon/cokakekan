@@ -17,8 +17,13 @@ class DetailsController < ApplicationController
   end
 
   def edit
-    detail.month_id = params[:month_id]
-    @detail = detail.find(params[:id])
+    @detail = Detail.find(params[:id])
+  end
+
+  def update
+    @detail = Detail.find_by(user_id: current_user.id, id: params[:id])
+    @detail.update(detail_params)
+    redirect_to month_details_path(@detail.month_id)
   end
 
   private

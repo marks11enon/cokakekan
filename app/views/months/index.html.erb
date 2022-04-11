@@ -19,7 +19,7 @@
               <tr>
                 <td>月末残高</td>
                 <td><%= month.balance_last %></td>
-                <td><%= link_to "編集", edit_month_path(month.id), class: "btn btn-primary" %></td>
+                <td><%= link_to "編集", edit_month_path(month.id), class: "btn btn-secondary" %></td>
                 <td><%= link_to "削除", month_path(month.id), method: :delete, class: "btn btn-danger" %></td>
               </tr>
             </tbody>

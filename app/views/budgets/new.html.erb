@@ -1,2 +1,23 @@
-<h1>Budgets#new</h1>
-<p>Find me in app/views/budgets/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div>
+    <h3>予算設定</h3><br>
+      <div>
+        <%= form_with model: @budget, url: budgets_path, local: true do |f| %>
+          <div>
+            <%= f.label :month, "家計簿", class: "control-label" %>
+            <%= f.date_field :month, class: "form-control" %>
+          </div>
+          <div>
+            <%= f.label :balance, "口座残高", class: "control-label" %><br>
+            <%= f.text_field :balance, class:"form-control" %>
+            <%= f.submit '登録', class:"btn btn-primary" %>
+          </div>
+          <div>
+            <%= link_to "キャンセル", months_path, class: "btn btn-secondary btn-sm" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

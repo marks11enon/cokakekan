@@ -1,11 +1,16 @@
 <div class="container">
   <div class="row">
-
-    <!-- ここにグラフを挿入  -->
-
     <div>
     <h3>家計簿一覧</h3><br>
+    <!-- ここにグラフを挿入  -->
+      <% if @month_chart_max > 10000 %>
+        <%= area_chart @month_chart.map { |month, balance_last| [month.strftime('%-m月'), balance_last / 10000] }, suffix: "万円" %>
+      <% else %>
+        <%= area_chart @month_chart.map { |month, balance_last| [month.strftime('%-m月'), balance_last] }, suffix: "円" %>
+      <% end %>
+    <!-- ここまで -->
       <div>
+        <p>家計簿一覧</p>
         <table class="table">
           <% @months.each do |month| %>
             <thead>
@@ -18,7 +23,7 @@
             <tbody>
               <tr>
                 <td>月末残高</td>
-                <td><%= month.balance_last %></td>
+                <td><%= month.balance_last.floor.to_s(:delimited, delimiter: ',') %>円</td>
                 <td><%= link_to "編集", edit_month_path(month.id), class: "btn btn-secondary" %></td>
                 <td><%= link_to "削除", month_path(month.id), method: :delete, class: "btn btn-danger" %></td>
               </tr>

@@ -6,7 +6,7 @@
         <%= form_with model: @month, url: months_path, local: true do |f| %>
           <div>
             <%= f.label :month, "家計簿", class: "control-label" %>
-            <%= f.date_field :month, class: "form-control" %>
+            <%= f.date_select :month, {use_month_numbers: true, start_year: 2021, date_separator: '年', discard_day: true}, {class: "form-control"} %>月
           </div>
           <div>
             <%= f.label :balance, "口座残高", class: "control-label" %><br>

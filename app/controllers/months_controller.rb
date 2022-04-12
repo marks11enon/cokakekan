@@ -6,13 +6,9 @@ class MonthsController < ApplicationController
 
   def create
     @month = Month.new(month_params)
-    @month.user_id = current_user.id
-
-
-    # 以下、要確認
 
     @data = Month.find_by(user_id: current_user.id, month: @month.month)
-    @month.balance_last = @month.balance
+    @month.balance_last = @month.balance #月初残高と月末残高を同一と定義
 
     if !@data.present?
       @month.user_id = current_user.id
@@ -24,8 +20,6 @@ class MonthsController < ApplicationController
     else
       redirect_to months_path
     end
-
-    #ここまで
   end
 
   def index
@@ -36,13 +30,19 @@ class MonthsController < ApplicationController
   end
 
   def edit
-    @month = Month.find(params[:id])
+    @month = Month.find_by(user_id: current_user.id, id: params[:id])
   end
 
   def update
-    month = Month.find(params[:id])
-    month.update
-    redirect_to months_path
+    @month = Month.find_by(user_id: current_user.id, id: params[:id])
+    total_for_each
+    @month.update(month_params)
+    @month.balance_last = @month.balance + @balance_of_payments
+    if @month.save
+      redirect_to months_path, notice: "月初残高を更新しました。"
+    else
+      render :edit, danger: "更新できませんでした。"
+    end
   end
 
   def destroy
@@ -55,5 +55,11 @@ class MonthsController < ApplicationController
   private
   def month_params
     params.require(:month).permit(:user_id, :month, :balance)
+  end
+
+  def total_for_each
+    @income_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:user).sum(:income)
+    @spendig_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:user).sum(:spending)
+    @balance_of_payments = @income_total - @spendig_total
   end
 end

@@ -26,6 +26,13 @@ class DetailsController < ApplicationController
     redirect_to month_details_path(@detail.month_id)
   end
 
+  def destroy
+    @detail = Detail.find_by(user_id: current_user.id, id: params[:id])
+    @detail.destroy
+    flash[:alert] = "明細を削除しました。"
+    redirect_to month_details_path(@detail.month_id)
+  end
+
   private
   def detail_params
     params.require(:detail).permit(:income, :spending, :note, :player, :date, :category_id)

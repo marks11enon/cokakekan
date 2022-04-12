@@ -7,12 +7,14 @@
         <%= link_to "明細を追加", new_month_detail_path, class: "btn btn-primary btn-sm" %>
         <%= link_to "家計簿一覧に戻る", months_path, class: "btn btn-secondary btn-sm" %>
       </div><br>
+    <!--ここに収支情報-->
+    
       <div>
         <table class="table">
           <% @details.each do |detail| %>
             <tbody>
               <tr>
-                <td><%= detail.date.strftime("%-d日") %></td>
+                <td><%= detail.date.strftime("%-m月%-d日") %></td>
                 <td>
                   <%= attachment_image_tag detail.category, :image, size: "30x30", format: 'jpeg', fallback: "no_image.jpeg" %>
                 </td>
@@ -25,6 +27,7 @@
                   <% else %>
                     <td>-<%= detail.spending.floor.to_s(:delimited, delimiter: ',') %>円</td>
                   <% end %>
+                <td><%= detail.note %></td>
                 <td><%= detail.player_i18n %></td>
                 <td><%= link_to "編集", edit_detail_path(detail.id), class: "btn btn-secondary btn-sm" %></td>
                 <td><%= link_to "削除", detail_path(detail.id), method: :delete, class: "btn btn-danger btn-sm" %></td>

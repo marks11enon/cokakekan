@@ -59,7 +59,7 @@ class MonthsController < ApplicationController
 
   def total_for_each
     @income_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:user).sum(:income)
-    @spendig_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:user).sum(:spending)
-    @balance_of_payments = @income_total - @spendig_total
+    @spending_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:user).sum(:spending)
+    @balance_of_payments = @income_total - @spending_total
   end
 end

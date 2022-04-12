@@ -8,7 +8,22 @@
         <%= link_to "家計簿一覧に戻る", months_path, class: "btn btn-secondary btn-sm" %>
       </div><br>
     <!--ここに収支情報-->
-    
+      <h5>今月の収支</h5>
+      <div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>収入</td>
+              <td><%= "#{@income_total.to_s(:delimited)}円" %></td>
+            </tr>
+            <tr>
+              <td>支出</td>
+              <td><%= "#{@spending_total.to_s(:delimited)}円" %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div>
         <table class="table">
           <% @details.each do |detail| %>

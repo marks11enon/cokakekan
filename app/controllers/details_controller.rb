@@ -1,4 +1,5 @@
 class DetailsController < ApplicationController
+  before_action :total_for_each
 
   def new
     @detail = Detail.new
@@ -14,7 +15,6 @@ class DetailsController < ApplicationController
 
   def index
     @details = Detail.where(user_id: current_user.id, month_id: params[:month_id]).includes(:month).order(date: :asc, id: :asc)
-    total_for_each
   end
 
   def edit
@@ -44,8 +44,10 @@ class DetailsController < ApplicationController
   end
 
   def total_for_each
-    @income_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:user).sum(:income)
-    @spending_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:user).sum(:spending)
+    @income_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:month).sum(:income)
+    @spending_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:month).sum(:spending)
+    @income_total_true_before_today = Detail.where(user_id: current_user.id, month_id: params[:month_id], status: :true).where("date <= ?", Date.today).includes(:month).sum(:income)
+    @spending_total_true_before_today = Detail.where(user_id: current_user.id, month_id: params[:month_id], status: :true).where("date <= ?", Date.today).includes(:month).sum(:spending)
     @balance_of_payments = @income_total - @spending_total
   end
 end

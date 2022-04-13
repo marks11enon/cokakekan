@@ -14,11 +14,11 @@
           <tbody>
             <tr>
               <td>収入</td>
-              <td><%= "#{@income_total.to_s(:delimited)}円" %></td>
+              <td><%= "+#{@income_total_true_before_today.to_s(:delimited)}円" %></td>
             </tr>
             <tr>
               <td>支出</td>
-              <td><%= "#{@spending_total.to_s(:delimited)}円" %></td>
+              <td><%= "-#{@spending_total_true_before_today.to_s(:delimited)}円" %></td>
             </tr>
           </tbody>
         </table>

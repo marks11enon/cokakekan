@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  def my_page
-    @user = User.new
+  def show
+    @user = current_user
   end
 
   def edit

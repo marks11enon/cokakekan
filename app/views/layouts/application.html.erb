@@ -12,20 +12,47 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-      <% end %>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/"><%= image_tag 'wallet.jpeg', size: "40x40" %>cokakekan</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li class="nav-item", style="margin-right: 10px;">
+                  <%= link_to "ホーム", main_page_path %>
+                </li>
+                <li class="nav-item", style="margin-right: 10px;">
+                  <%= link_to "家計簿", months_path %>
+                </li>
+                <li class="nav-item", style="margin-right: 10px;">
+                  <%= link_to "精算", months_path %>
+                </li>
+                <li class="nav-item", style="margin-right: 10px;">
+                  <%= link_to "マイページ", user_my_page_path(current_user.id) %>
+                </li>
+                <li class="nav-item", style="margin-right: 10px;">
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                </li>
+              <% else %>
+                <li class="nav-item", style="margin-right: 10px;">
+                  <%= link_to "新規登録", new_user_registration_path %>
+                </li>
+                <li class="nav-item", style="margin-right: 10px;">
+                  <%= link_to "ログイン", new_user_session_path %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
-
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
+  <%= render 'details/footer' %>
 </html>

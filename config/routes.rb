@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: 'homes#top'
-  get '/main_page' => "homes#main_page", as: "main_page"
   devise_for :users
-  get '/users/my_page' => "users#show", as: "my_page"
+  get '/main_page' => "homes#main_page", as: "main_page"
+  get '/users/my_page' => "users#show", as: "user_my_page"
   resources :users, only: [:edit, :update]
   resources :categories, only: [:index, :create, :edit, :destroy, :update]
   resources :budgets, only: [:new, :create, :destroy, :index]

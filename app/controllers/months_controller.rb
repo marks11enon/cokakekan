@@ -24,7 +24,7 @@ class MonthsController < ApplicationController
 
   def index
     @months = Month.all.order(month: :desc)
-    @month = Month.new
+    @month = Month.find_by(user_id: current_user.id, month: Date.today.beginning_of_month)
     @month_chart = Month.where(user_id: current_user.id).includes(:user).order(month: :asc).last(12).pluck(:month, :balance_last)
     @month_chart_max = Month.where(user_id: current_user.id).includes(:user).order(month: :asc).last(12).pluck(:balance_last).max
   end

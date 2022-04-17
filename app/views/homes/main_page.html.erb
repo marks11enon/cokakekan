@@ -1,16 +1,42 @@
 <div class="container">
   <div class="row">
-    <div>
-    <h3><%= @this %>月の家計簿</h3><br>
-    <table class="table">
-      <tbody>
+    <div class="col">
+      <table class="table">
+        <tr>
+          <td><%= @this %>月の家計簿</td>
+        </tr>
+      </table>
+      <table>
         <tr>
           <td>口座残高</td>
           <td><%= @month.balance_last.floor.to_s(:delimited, delimiter: ',') %>円</td>
         </tr>
-      </tbody>
-    </table>
-
+      </table>
     </div>
+    <div class="col">
+      <table class="table">
+        <tr>
+          <td>今月の収支</td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>収入</td>
+          <td><%= "+#{@income_total_true_before_today.to_s(:delimited)}円" %></td>
+        </tr>
+        <tr>
+          <td>支出</td>
+          <td><%= "-#{@spending_total_true_before_today.to_s(:delimited)}円" %></td>
+        </tr>
+        <tr>
+          <td>収支</td>
+          <td><%= "#{@balance_of_payments.to_s(:delimited)}円" %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div>
+    <!--今月の支出-->
+    
   </div>
 </div>

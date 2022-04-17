@@ -19,6 +19,15 @@ class HomesController < ApplicationController
     end
     @detail = Detail.where(user_id: current_user.id, month_id: @month.id) if @month.present?
     @budget = Budget.where(user_id: current_user.id, month_id: @month.id) if @month.present?
+    
+    
+    
+    target_month = Month.find_by(user_id: current_user, month: Date.current.strftime("%Y-%m-01"))
+    sum_result = Detail.where(month_id: target_month.id).group(:category).sum(:spending)
+    @output_result = {}
+    sum_result.each do |result|
+      @output_result[result[0].name] = result[1]
+    end 
   end
 
   private

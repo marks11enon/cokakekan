@@ -54,5 +54,7 @@
       <%= yield %>
     </main>
   </body>
-  <%= render 'details/footer' %>
+  <% if user_signed_in? %>
+    <%= render 'details/footer' %>
+  <% end %>
 </html>

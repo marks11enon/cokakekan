@@ -1,2 +1,23 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div>
+      <h3>プロフィール編集</h3><br>
+      <%= form_with model: @user, local: true do |f| %>
+        <table class="table">
+          <tr>
+            <th>名前</th>
+            <td><%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <td><%= f.submit "変更を保存", class: "btn btn-primary btn-sm" %></td>
+            <td><%= link_to "キャンセル", user_my_page_path, class: "btn btn-secondary btn-sm" %></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

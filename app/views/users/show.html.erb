@@ -1,18 +1,23 @@
 <div class="container">
   <div class="row">
     <div>
-      <h3><%= @user.name %></h3>
+      <h3>マイページ</h3><br>
       <table class="table">
-        <tbody>
-          <tr>
-            <th>メールアドレス</th>
-            <td><%= @user.email %></td>
-          </tr>
-        </tbody>
+        <tr>
+          <th>名前</th>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @user.email %></td>
+        </tr>
+        <tr>
+          <% if @user == current_user %>
+            <td><%= link_to "予算設定", budgets_path, class: "btn btn-primary btn-sm" %></td>
+            <td><%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-secondary btn-sm" %></td>
+          <% end %>
+        </tr>
       </table>
-      <% if @user == current_user %>
-        <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-      <% end %>
     </div>
   </div>
 </div>

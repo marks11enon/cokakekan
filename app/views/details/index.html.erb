@@ -6,7 +6,7 @@
       <div>
         <%= link_to "明細を追加", new_month_detail_path, class: "btn btn-primary btn-sm" %>
         <%= link_to "家計簿一覧に戻る", months_path, class: "btn btn-secondary btn-sm" %>
-        <%= link_to "CSVを出力", month_details_path(@month.id, format: :csv), class: "btn btn-secondary btn-sm" %>
+        <%= link_to "CSVを出力", month_details_path(@this_month.id, format: :csv), class: "btn btn-secondary btn-sm" %>
       </div><br>
     <!--ここに収支情報-->
       <h5>今月の収支</h5>

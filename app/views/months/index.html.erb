@@ -33,6 +33,9 @@
       </div>
     </div>
   </div>
+  <% if user_signed_in? %>
+    <%= render 'details/footer' %>
+  <% end %>
 
   <!-- ボタンを作成  -->
   <div>

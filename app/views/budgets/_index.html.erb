@@ -1,0 +1,15 @@
+<% @budgets.each do |budget| %>
+  <thead>
+    <tr>
+      <th>
+        <%= budget.month.month.strftime("%Y年%-m月") %>の予算
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= budget.amount.to_s(:delimited, delimiter: ',') %></td>
+      <td><%= link_to "削除", budget_path(budget.id), method: :delete, remote: true, class: "btn btn-danger btn-sm" %></td>
+    </tr>
+  </tbody>
+<% end %>

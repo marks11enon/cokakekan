@@ -4,7 +4,7 @@
     <h3>予算</h3>
       <% flash[:notice] %>
       <div>
-        <%= form_with model: @add, url: budgets_path, local: true do |f| %>
+        <%= form_with model: @budget, url: budgets_path, method: :post do |f| %>
           <div>
             <%= f.label :amount, "#{@month.month.strftime("%Y年%-m月")}の予算登録" %>
             <%= f.text_field :amount, placeholder: "金額を入力してください", class: "form-control" %>
@@ -13,22 +13,10 @@
         <% end %>
       </div><br>
     <div>
-        <table class="table">
-          <% @budgets.each do |budget| %>
-            <thead>
-              <tr>
-                <th>
-                  <%= budget.month.month.strftime("%Y年%-m月") %>の予算
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><%= budget.amount.to_s(:delimited, delimiter: ',') %></td>
-                <td><%= link_to "削除", budget_path(budget.id), method: :delete, class: "btn btn-danger btn-sm" %></td>
-              </tr>
-            </tbody>
-          <% end %>
+        <table id="budget" class="table">
+          <!--ここから非同期-->
+            <%= render 'budgets/index', budgets: @budgets %>
+          <!--ここまで-->
         </table>
       </div>
     </div>

@@ -7,4 +7,7 @@ class User < ApplicationRecord
   has_many :months, dependent: :destroy
   has_many :details, dependent: :destroy
   has_many :budgets, dependent: :destroy
+
+  validates :name, presence: true
+  validates :email, presence: true
 end

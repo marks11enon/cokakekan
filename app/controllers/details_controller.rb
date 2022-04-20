@@ -15,6 +15,7 @@ class DetailsController < ApplicationController
   end
 
   def index
+    @this_month = Month.find_by(user_id: current_user.id, month: Date.today.beginning_of_month)
     @details = Detail.where(user_id: current_user.id, month_id: params[:month_id]).includes(:month).order(date: :asc, id: :asc)
 
     respond_to do |format|

@@ -4,9 +4,9 @@
     <h3>予算</h3>
       <% flash[:notice] %>
       <div>
-        <%= form_with model: @budget, url: budgets_path, method: :post do |f| %>
+        <%= form_with model: @add, url: month_budgets_path, method: :post do |f| %>
           <div>
-            <%= f.label :amount, "#{@month.month.strftime("%Y年%-m月")}の予算登録" %>
+            <%= f.label :amount, "予算登録" %>
             <%= f.text_field :amount, placeholder: "金額を入力してください", class: "form-control" %>
             <%= f.submit '登録', class:"btn btn-primary btn-sm" %>
           </div>

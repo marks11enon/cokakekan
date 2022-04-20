@@ -29,10 +29,10 @@
                   <%= link_to "家計簿", months_path %>
                 </li>
                 <li class="nav-item", style="margin-right: 10px;">
-                  <%= link_to "今月の明細", month_details_path(@this_month) %>
+                  <%= link_to "今月の明細", month_details_path(@authenticated_this_month) %>
                 </li>
                 <li class="nav-item", style="margin-right: 10px;">
-                  <%= link_to "予算", budgets_path %>
+                  <%= link_to "予算", month_budgets_path(@authenticated_this_month) %>
                 </li>
                 <li class="nav-item", style="margin-right: 10px;">
                   <%= link_to "マイページ", user_my_page_path(current_user.id) %>

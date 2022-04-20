@@ -13,7 +13,7 @@
         </tr>
         <tr>
           <% if @user == current_user %>
-            <td><%= link_to "予算設定", budgets_path, class: "btn btn-primary btn-sm" %></td>
+            <td><%= link_to "予算設定", month_budgets_path(@month), class: "btn btn-primary btn-sm" %></td>
             <td><%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-secondary btn-sm" %></td>
           <% end %>
         </tr>

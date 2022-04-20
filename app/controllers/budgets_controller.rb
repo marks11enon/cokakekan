@@ -6,28 +6,24 @@ class BudgetsController < ApplicationController
 
   def create
     @budgets = Budget.all # 追加
-    @budget = Budget.new(budget_params)
-    if !this_month_budget
-      @budget.user_id = current_user.id
-      @budget.month_id = @month.id
-
-      if @budget.save
-        # redirect_to budgets_path, success: "予算を登録しました。"
-        render :index
+    @add = Budget.new(budget_params)
+    if !authenticate_budget
+      @add.month_id = params[:month_id]
+      @add.user_id = current_user.id
+      if @add.save
+        render :index, success: '予算を設定しました'
       else
-        # redirect_to budgets_path, danger: "予算を設定できませんでした。"
-        render :index
+        render :index, danger: '予算を設定できませんでした'
       end
     else
-      # redirect_to budgets_path, danger: "予算は既に設定されています。"
-      render :index
+      render :index, danger: '予算は既に設定されています'
     end
   end
 
   def index
+    @month = Month.find_by(user_id: current_user.id, id: params[:month_id])
+    authenticate_budget
     @budgets = Budget.all.order(month_id: :asc, id: :asc)
-    @month = Month.find_by(user_id: current_user.id, month: Date.today.beginning_of_month)
-    @budget = Budget.new(budget_params)
   end
 
   def destroy
@@ -37,12 +33,12 @@ class BudgetsController < ApplicationController
   end
 
   private
+
   def budget_params
     params.permit(:amount)
   end
 
-  def this_month_budget
-    @month = Month.find_by(user_id: current_user.id, month: Date.today.beginning_of_month)
-    @this_month_budget = Budget.find_by(user_id: current_user.id, month_id: @month.id)
+  def authenticate_budget
+    @budget = Budget.find_by(user_id: current_user.id, month_id: params[:month_id])
   end
 end

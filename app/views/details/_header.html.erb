@@ -1,6 +1,36 @@
-<%= search_form_for @search, url: month_details_path(@month), class:"search-form" do |f| %>
-  <%= f.search_field :name_cont, placeholder: 'キーワードから探す', class:'input-box' %>
-  <%= f.button type: "submit", class:"search-button" do%>
-    <%= image_tag "search.png", class:"search-icon" %>
-  <% end %>
+<%= search_form_for @q, url: main_page_path, class:"search-form" do |f| %>
+  <%= f.date_field :date_gteq %>
+  <%= f.date_field :date_lteq %>
+  <%= f.submit "検索", class:"search-button" %>
+<% end %>
+<% if @search_details.present? %>
+  <!--検索がヒットした場合-->
+  <table class="table">
+    <% @search_details.each do |detail| %>
+      <tbody>
+        <tr>
+          <td><%= detail.date.strftime("%-m月%-d日") %></td>
+          <td>
+            <%= attachment_image_tag detail.category, :image, size: "30x30", format: 'jpeg', fallback: "no_image.jpeg" %>
+          </td>
+          <td>
+            <%= detail.category.name %>
+          </td>
+          </td>
+            <% if detail.income.present? %>
+              <td>+<%= detail.income.floor.to_s(:delimited, delimiter: ',') %>円</td>
+            <% else %>
+              <td>-<%= detail.spending.floor.to_s(:delimited, delimiter: ',') %>円</td>
+            <% end %>
+          <td><%= detail.note %></td>
+          <td><%= detail.player_i18n %></td>
+          <td><%= link_to "編集", edit_detail_path(detail.id), class: "btn btn-secondary btn-sm" %></td>
+          <td><%= link_to "削除", detail_path(detail.id), method: :delete, class: "btn btn-danger btn-sm" %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+<% else %>
+  <!--検索がヒットしなかった場合-->
+  <p>検索結果はありません</p>
 <% end %>

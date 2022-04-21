@@ -1,5 +1,6 @@
 class DetailsController < ApplicationController
   before_action :total_for_each
+  # before_action :search
   require 'csv'
 
   def new
@@ -13,6 +14,13 @@ class DetailsController < ApplicationController
     detail.save
     redirect_to month_details_path
   end
+
+  # def search
+    # ransackの検索メソッド
+    # @q = Detail.ransack(params[:q])
+    # detailsの検索結果一覧
+    # @search_details = @q.result(distinct: true).includes(:month).order(date: :asc, id: :asc).page(params[:page]).per(5)
+  # end
 
   def index
     @this_month = Month.find_by(user_id: current_user.id, month: Date.today.beginning_of_month)

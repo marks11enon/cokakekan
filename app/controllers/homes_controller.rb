@@ -30,6 +30,8 @@ class HomesController < ApplicationController
       end
       @spending_sum = Detail.where(user_id: current_user.id, month_id: @month.id, status: :true).sum(:spending)
     end
+
+    @details = Detail.where(user_id: current_user.id)
   end
 
   private

@@ -41,6 +41,10 @@
   </div><br>
   <div>
     <%= pie_chart @output_result, donut: true, library: {title: {text: "今月の支出 #{@spending_sum}"}} %>
+  </div><br>
+  <div>
+    <!-- 検索機能実装  -->
+    <%= render "details/header" %>
   </div>
   <% if user_signed_in? %>
     <%= render 'details/footer' %>

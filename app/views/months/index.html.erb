@@ -33,11 +33,16 @@
       </div>
     </div>
   </div>
-  <% if user_signed_in? %>
-    <%= render 'details/footer' %>
-  <% end %>
+  <div>
+    <!-- 立替精算 -->
+  </div>
 
-  <!-- ボタンを作成  -->
+  <div>
+    <% if user_signed_in? %>
+      <%= render 'details/footer' %>
+    <% end %>
+  </div>
+  <!-- +ボタンを作成  -->
   <div>
     <%= link_to "新規作成", new_month_path, class: "btn btn-primary" %>
   </div>

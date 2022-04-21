@@ -62,3 +62,5 @@ gem "refile-mini_magick"
 gem "enum_help"
 gem "chartkick"
 gem 'axlsx_rails'
+gem 'ransack'
+gem 'kaminari','~> 1.2.1'

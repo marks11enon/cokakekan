@@ -2,6 +2,14 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:top]
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticated_this_month
+  before_action :set_search
+
+  def set_search
+    @search = Detail.ransack(params[:q])
+    # ransackの検索メソッド
+    @search_details = @search.result(distinct: true).order(created_at: "DESC").includes(:user).page(params[:page]).per(5)
+    # detailsの検索結果一覧
+  end
 
   protected
   def configure_permitted_parameters

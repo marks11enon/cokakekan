@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     # ransackの検索メソッド
     @q = Detail.ransack(params[:q])
     # detailsの検索結果一覧
-    @search_details = @q.result(distinct: true).order(date: :asc, id: :asc).page(params[:page]).per(5)
+    @search_details = @q.result(distinct: true).order(date: :desc, id: :desc).page(params[:page]).per(10)
   end
 
 

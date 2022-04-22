@@ -42,6 +42,34 @@
   <div>
     <%= pie_chart @output_result, donut: true, library: {title: {text: "今月の支出 #{@spending_sum}"}} %>
   </div><br>
+
+  <!-- 立替精算 -->
+   <div class="row">
+    <div class="col">
+      <p><strong>立替精算</strong></p>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>彼氏</td>
+            <td><%= "#{@spending_total_by_him.to_s(:delimited)}円" %></td>
+          </tr>
+          <tr>
+            <td>彼女</td>
+            <td><%= "#{@spending_total_by_her.to_s(:delimited)}円" %></td>
+          </tr>
+          <tr>
+            <td>差額</td>
+            <% if @spending_calculate > 0 %>
+              <td><%= "彼氏は #{@spending_calculate.to_s(:delimited)}円 をもらう" %></td>
+            <% else %>
+              <td><%= "彼女は #{@spending_calculate.abs.to_s(:delimited)}円 をもらう" %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><br>
+
   <div>
     <!-- 検索機能実装  -->
     <%= render "details/header" %>

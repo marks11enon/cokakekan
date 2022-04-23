@@ -1,37 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'ユーザー新規登録' do
-    before do
-      @user = FactoryBot.build(:user)
-    end
-
-
-    it 'nameと,email, password, password_confirmationが存在すれば登録できる' do
-      expect(@user).to be_valid
-    end
-
-    it 'passwordが7文字以上で登録できる' do
-      @user.password = nil
-      @user.password_confirmation = @user.password
-      expect(@user).to be_valid
-    end
-
-    it "nameが空だと登録できない" do
-      @user.name = nil
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Name can't be blank")
-    end
-    it "emailが空だと登録できない" do
-      @user.email = nil
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Email can't be blank")
-    end
-    it "emailに一意性がないと登録できない" do
-      @user.save
-      another_user = FactoryBot.build(:user, email: @user.email)
-      another_user.valid?
-      expect(another_user.errors.full_messages).to include("Email has already been taken")
-    end
+  it "名前、メールアドレス、パスワードがある場合、有効である" do
+    user = FactoryBot.build(:user)
+    expect(user).to be_valid
   end
+
+  it "名前がなければ登録できない" do
+    expect(FactoryBot.build(:user, name: "")).to_not be_valid
+  end
+
+  it "メールアドレスがなければ登録できない" do
+    expect(FactoryBot.build(:user, email: "")).to_not be_valid
+  end
+
+  it "メールアドレスが重複していたら登録できない" do
+    user1 = FactoryBot.create(:user,name: "taro", email: "taro@example.com")
+    expect(FactoryBot.build(:user, name: "ziro", email: user1.email)).to_not be_valid
+  end
+
+  it "パスワードがなければ登録できない" do
+    expect(FactoryBot.build(:user, password: "")).to_not be_valid
+  end
+
+  it "パスワードが7文字以上でないと登録できない" do
+    expect(FactoryBot.build(:user, password: "123456")).to_not be_valid
+  end
+
+  it "password_confirmationとpasswordが異なる場合保存できない" do
+    expect(FactoryBot.build(:user,password:"password", password_confirmation: "passward")).to_not be_valid
+  end
+
 end

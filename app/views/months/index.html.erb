@@ -11,6 +11,9 @@
     <!-- ここまで -->
       <div>
         <p>家計簿一覧</p>
+        <div>
+          <%= link_to "家計簿作成", new_month_path, class: "btn btn-primary btn-sm" %>
+        </div>
         <table class="table">
           <% @months.each do |month| %>
             <thead>
@@ -34,13 +37,9 @@
       </div>
     </div>
   </div>
-  <div>
+  <div><!-- +ボタンを作成  -->
     <% if user_signed_in? %>
       <%= render 'details/footer' %>
     <% end %>
-  </div>
-  <!-- +ボタンを作成  -->
-  <div>
-    <%= link_to "新規作成", new_month_path, class: "btn btn-primary" %>
   </div>
 </div>

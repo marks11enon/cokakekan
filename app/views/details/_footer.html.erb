@@ -1,11 +1,9 @@
 <% if @month.present? %>
   <footer>
-    <div class="container">
-      <div class="row">
-        <%= link_to new_month_detail_path(@month.id) do %>
-          <div class="plus-bottom"><i class="fas fa-pen"></i></div>
-        <% end %>
-      </div>
+    <div class="fixed-btn">
+      <%= link_to new_month_detail_path(@month.id) do %>
+        <i class="fas fa-plus-circle"></i></div>
+      <% end %>
     </div>
   </footer>
 <% end %>

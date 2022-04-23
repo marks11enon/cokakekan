@@ -9,7 +9,7 @@ class Detail < ApplicationRecord
   validates :player, presence: true
   validates :status, presence: true
   validates :date, presence: true
-  validates :note, length: { maximum: 50 }
+  validates :note, length: { maximum: 15 }
 
   # enum 設定
   enum player: { by_him: 0, by_her: 1 }

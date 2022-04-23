@@ -5,13 +5,14 @@ RSpec.describe Category, type: :model do
     @category = FactoryBot.build(:category)
   end
 
-  it "カテゴリ名とimage_idがあれば登録できる" do
-    expect(@category).to be_valid
-  end
+  describe "カテゴリ新規登録" do
+    it "カテゴリ名とimage_idがあれば登録できる" do
+      expect(@category).to be_valid
+    end
 
-  it "カテゴリ名がなければ登録できない" do
-    @category.name = nil
-    expect(@category).to be_invalid
+    it "カテゴリ名がなければ登録できない" do
+      @category.name = nil
+      expect(@category).to be_invalid
+    end
   end
-
 end

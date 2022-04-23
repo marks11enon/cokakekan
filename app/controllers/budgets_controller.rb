@@ -23,7 +23,7 @@ class BudgetsController < ApplicationController
   def index
     @month = Month.find_by(user_id: current_user.id, id: params[:month_id])
     authenticate_budget
-    @budgets = Budget.all.order(month_id: :asc, id: :asc)
+    @budgets = Budget.where(user_id: current_user.id).order(month_id: :asc, id: :asc)
   end
 
   def destroy

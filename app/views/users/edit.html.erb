@@ -10,7 +10,7 @@
           </tr>
           <tr>
             <th>メールアドレス</th>
-            <td><%= @user.email %></td>
+            <td><%= f.text_field :email, autofocus: true, id:"inputEmail" %></td>
           </tr>
           <tr>
             <td><%= f.submit "変更を保存", class: "btn btn-primary btn-sm" %></td>

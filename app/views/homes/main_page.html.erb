@@ -1,20 +1,28 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <div class="white-box">
-        <table class="table">
-          <tr>
-            <td><%= @this %>月の家計簿</td>
-          </tr>
-        </table>
-        <table>
-          <tr>
-            <td>口座残高</td>
-            <td><%= @month.balance_last.floor.to_s(:delimited, delimiter: ',') %>円</td>
-          </tr>
-        </table>
-      </div>
+      <% if @month.present? %>
+        <div class="white-box">
+          <table class="table">
+            <tr>
+              <td><%= @this %>月の家計簿</td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td>口座残高</td>
+              <td><%= @month.balance_last.floor.to_s(:delimited, delimiter: ',') %>円</td>
+            </tr>
+          </table>
+        </div>
+      <% else %>
+        <div class="white-box">
+          <p>家計簿が登録されていません。</p>
+          <%= link_to "家計簿を作成", new_month_path, class:"btn btn-primary btn-sm" %>
+        </div><br>
+      <% end %>
     </div>
+  <% if @detail.present? %>
     <div class="col">
       <div class="white-box">
         <table class="table">
@@ -42,9 +50,7 @@
   <div>
     <%= pie_chart @output_result, donut: true, library: {title: {text: "今月の支出 #{@spending_sum}"}} %>
   </div><br>
-
-  <!-- 立替精算 -->
-   <div class="row">
+  <div class="row">
     <div class="col">
       <p><strong>立替精算</strong></p>
       <table class="table">
@@ -69,11 +75,10 @@
       </table>
     </div>
   </div><br>
-
-  <div>
-    <!-- 検索機能実装  -->
+  <div><!-- 検索機能実装  -->
     <%= render "details/header" %>
   </div>
+  <% end %>
   <% if user_signed_in? %>
     <%= render 'details/footer' %>
   <% end %>

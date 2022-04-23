@@ -1,4 +1,5 @@
 class HomesController < ApplicationController
+  skip_before_action :authenticated_this_month, only:[:top]
 
   def top
   end
@@ -29,11 +30,11 @@ class HomesController < ApplicationController
         @output_result[result[0].name] = result[1]
       end
       @spending_sum = Detail.where(user_id: current_user.id, month_id: @month.id, status: :true).sum(:spending)
+      @details = Detail.where(user_id: current_user.id)
+      @spending_total_by_him = Detail.where(user_id: current_user.id, month_id: @month.id, player: "by_him").sum(:spending)
+      @spending_total_by_her = Detail.where(user_id: current_user.id, month_id: @month.id, player: "by_her").sum(:spending)
+      @spending_calculate = @spending_total_by_him - @spending_total_by_her
     end
-    @details = Detail.where(user_id: current_user.id)
-    @spending_total_by_him = Detail.where(user_id: current_user.id, month_id: @month.id, player: "by_him").sum(:spending)
-    @spending_total_by_her = Detail.where(user_id: current_user.id, month_id: @month.id, player: "by_her").sum(:spending)
-    @spending_calculate = @spending_total_by_him - @spending_total_by_her
   end
 
   private

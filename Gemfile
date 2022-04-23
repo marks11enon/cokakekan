@@ -32,6 +32,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -64,3 +67,5 @@ gem "chartkick"
 gem 'axlsx_rails'
 gem 'ransack'
 gem 'kaminari','~> 1.2.1'
+gem 'rubocop'
+gem 'rubocop-rails'

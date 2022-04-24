@@ -109,6 +109,10 @@ GEM
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     enum_help (0.0.18)
       activesupport (>= 3.0.0)
     erubi (1.10.0)
@@ -167,6 +171,7 @@ GEM
     msgpack (1.4.5)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
+    mysql2 (0.5.3)
     netrc (0.11.0)
     nio4r (2.5.8)
     nokogiri (1.13.3)
@@ -182,8 +187,7 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
-    puma (5.6.2)
-      nio4r (~> 2.0)
+    puma (3.12.6)
     racc (1.6.0)
     rack (2.2.3)
     rack-mini-profiler (2.3.4)
@@ -352,6 +356,7 @@ DEPENDENCIES
   caxlsx_rails
   chartkick
   devise
+  dotenv-rails
   enum_help
   factory_bot_rails
   faker
@@ -359,8 +364,9 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari (~> 1.2.1)
   listen (~> 3.3)
+  mysql2
   pry-rails
-  puma (~> 5.0)
+  puma (~> 3.11)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.5)
   ransack

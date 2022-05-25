@@ -62,7 +62,10 @@ class DetailsController < ApplicationController
   end
 
   def total_for_each
-    @income_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:month).sum(:income)
+    details = current_user.details.includes(:month)
+    details_in_month = details.where(month_id: params[:id])
+
+    @income_total = details_in_month.sum(:income)
     @spending_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:month).sum(:spending)
     @income_total_true_before_today = Detail.where(user_id: current_user.id, month_id: params[:month_id], status: :true).where("date <= ?", Date.today).includes(:month).sum(:income)
     @spending_total_true_before_today = Detail.where(user_id: current_user.id, month_id: params[:month_id], status: :true).where("date <= ?", Date.today).includes(:month).sum(:spending)

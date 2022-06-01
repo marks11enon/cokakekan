@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def search
+    #@detail = Detail.where(user_id: current_user.id)
     # ransackの検索メソッド
     @q = Detail.ransack(params[:q])
     # detailsの検索結果一覧

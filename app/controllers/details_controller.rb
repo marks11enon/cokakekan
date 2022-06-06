@@ -62,7 +62,7 @@ class DetailsController < ApplicationController
   end
 
   def total_for_each
-    details = current_user.details.includes(:month)
+    details = Detail.where(user_id: current_user.id).includes(:month)
     details_in_month = details.where(month_id: params[:id])
     @income_total = details_in_month.sum(:income)
     @spending_total = details_in_month.sum(:spending)

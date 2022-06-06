@@ -62,8 +62,17 @@ class DetailsController < ApplicationController
   end
 
   def total_for_each
-    @income_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:month).sum(:income)
-    @spending_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:month).sum(:spending)
+    details = current_user.details.includes(:month)
+    details_in_month = details.where(month_id: params[:id])
+    @income_total = details_in_month.sum(:income)
+    @spending_total = details_in_month.sum(:spending)
+
+    #details_before_today = details_in_month.where(status: :true).where("date <= ?", Date.today)
+    #@income_total_true_before_today = details_before_today.sum(:income)
+    #@spending_total_true_before_today = details_before_today.sum(:spending)
+
+    #@income_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:month).sum(:income)
+    #@spending_total = Detail.where(user_id: current_user.id, month_id: params[:id]).includes(:month).sum(:spending)
     @income_total_true_before_today = Detail.where(user_id: current_user.id, month_id: params[:month_id], status: :true).where("date <= ?", Date.today).includes(:month).sum(:income)
     @spending_total_true_before_today = Detail.where(user_id: current_user.id, month_id: params[:month_id], status: :true).where("date <= ?", Date.today).includes(:month).sum(:spending)
     @balance_of_payments = @income_total - @spending_total

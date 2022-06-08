@@ -26,6 +26,8 @@ class DetailsController < ApplicationController
     @this_month = Month.find_by(user_id: current_user.id, month: Date.today.beginning_of_month)
     @month = Month.find_by(user_id: current_user.id, id: params[:month_id])
     @details = Detail.where(user_id: current_user.id, month_id: params[:month_id]).includes(:month).order(date: :desc, id: :desc).page(params[:page]).per(10)
+    #@details = current_user.details_in_month(params[:month_id]).order(date: :desc, id: :desc).page(params[:page]).per(10)
+
 
     respond_to do |format|
       format.html

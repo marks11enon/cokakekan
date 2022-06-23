@@ -5,6 +5,7 @@
       <div>
         <%= form_with model: @detail, url: month_details_path, local: true do |f| %>
           <!--  支出 or 収入 選択  -->
+          <!--%= render 'layouts/error_messages', model: f.object %>-->
           <div>
             <%= f.label :spending, "支出", class: "control-label" %>
             <%= f.text_field :spending, class: "form-control", placeholder: "0円" %>

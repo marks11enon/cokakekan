@@ -11,8 +11,11 @@ class DetailsController < ApplicationController
     detail = Detail.new(detail_params)
     detail.user_id = current_user.id
     detail.month_id = params[:month_id]
-    detail.save
-    redirect_to month_details_path
+    if detail.save
+      redirect_to month_details_path
+    else
+      render "new"
+    end
   end
 
   # def search

@@ -36,9 +36,9 @@
                 </td>
                 </td>
                   <% if detail.income.present? %>
-                    <td>+<%= detail.income.floor.to_s(:delimited, delimiter: ',') %>円</td>
+                    <td>+<%= detail.income.to_s(:delimited, delimiter: ',') %>円</td>
                   <% else %>
-                    <td>-<%= detail.spending.floor.to_s(:delimited, delimiter: ',') %>円</td>
+                    <td>-<%= detail.spending.to_s(:delimited, delimiter: ',') %>円</td>
                   <% end %>
                 <td><%= detail.note %></td>
                 <td><%= detail.player_i18n %></td>

@@ -9,6 +9,9 @@
             <%= f.date_select :month, {use_month_numbers: true, start_year: 2021, date_separator: '年', discard_day: true}, {class: "form-control"} %>月
           </div>
           <div>
+            <p>前月口座残高</p>
+          </div>
+          <div>
             <%= f.label :balance, "口座残高", class: "control-label" %><br>
             <%= f.text_field :balance, class:"form-control" %>
             <%= f.submit '登録', class:"btn btn-primary" %>
